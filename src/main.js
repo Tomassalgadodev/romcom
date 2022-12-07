@@ -12,13 +12,20 @@ var saveButton = document.querySelector('.save-cover-button');
 var viewSavedButton = document.querySelector('.view-saved-button');
 var showNewCoverButton = document.querySelector('.random-cover-button');
 var makeCustomCoverButton = document.querySelector('.make-new-button');
+var makeUserBookButton = document.querySelector('.create-new-book-button');
 
 // Page Sections
 var homeSection = document.querySelector('.home-view');
 var savedSection = document.querySelector('.saved-view');
 var customSection = document.querySelector('.form-view');
 
-console.log(coverTitle);
+// Input Fields
+
+var userCover = document.querySelector('.user-cover');
+var userTitle = document.querySelector('.user-title');
+var userTagline1 = document.querySelector('.user-desc1');
+var userTagline2 = document.querySelector('.user-desc2');
+
 
 // We've provided a few variables below
 var savedCovers = [
@@ -35,6 +42,10 @@ makeCustomCoverButton.addEventListener('click', showCustomPage);
 viewSavedButton.addEventListener('click', showSavedPage);
 
 homeButton.addEventListener('click', showHomePage);
+
+makeUserBookButton.addEventListener('click', makeUserBook);
+
+
 
 // Create your event handlers and other functions here 👇
 
@@ -64,6 +75,7 @@ function showCustomPage() {
   homeSection.classList.add('hidden');
   savedSection.classList.add('hidden')
   customSection.classList.remove('hidden');
+  makeUserBookButton.setAttribute('type', 'button');
 }
 
 function showSavedPage() {
@@ -83,6 +95,19 @@ function showHomePage() {
   savedSection.classList.add('hidden');
   homeSection.classList.remove('hidden');
 }
+
+function makeUserBook() {
+  userBook = new Cover(userCover.value, userTitle.value, userTagline1.value, userTagline2.value);
+  image.setAttribute('src', userBook.cover);
+  coverTitle.innerText = userBook.title;
+  tagline1.innerText = userBook.tagline1;
+  tagline2.innerText = userBook.tagline2;
+  covers.push(userBook.cover);
+  titles.push(userBook.title);
+  descriptors.push(userBook.tagline1, userBook.tagline2);
+  console.log(covers);
+  showHomePage();
+}
   
 
 // We've provided one function to get you started
@@ -99,4 +124,15 @@ function getRandomIndex(array) {
 //   coverTitle.innerText = randomTitle;
 //   tagline1.innerText = randomTag1;
 //   tagline2.innerText = randomTag2;
+// }
+
+
+// function makeUserBook() {
+//   image.setAttribute('src', userCover.value);
+//   coverTitle.innerText = userTitle.value;
+//   tagline1.innerText = userTagline1.value;
+//   tagline2.innerText = userTagline2.value;
+//   userBook = new Cover(userCover.value, userTitle.value, userTagline1.value, userTagline2.value);
+//   console.log(userBook);
+//   showHomePage();
 // }
