@@ -81,6 +81,10 @@ function showHomePage() {
 }
 
 function makeUserBook() {
+  if (userCover.value.length === 0 || userTitle.value.length === 0 || userTagline1.value.length === 0 || userTagline2.value.length === 0) {
+    alert('Please Fill In All Fields');
+    return; 
+  }
   currentCover = new Cover(userCover.value, userTitle.value, userTagline1.value, userTagline2.value);
   displayCurrentCover(currentCover);
   covers.push(currentCover.cover);
