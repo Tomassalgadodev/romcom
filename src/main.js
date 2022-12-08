@@ -1,38 +1,29 @@
 // Create variables targetting the relevant DOM elements here 👇
 
-// Cover Variables
 var coverTitle = document.querySelector('.cover-title');
 var tagline1 = document.querySelector('.tagline-1');
 var tagline2 = document.querySelector('.tagline-2');
 var image = document.querySelector('.cover-image');
-
-// Buttons
 var homeButton = document.querySelector('.home-button');
 var saveButton = document.querySelector('.save-cover-button');
 var viewSavedButton = document.querySelector('.view-saved-button');
 var showNewCoverButton = document.querySelector('.random-cover-button');
 var makeCustomCoverButton = document.querySelector('.make-new-button');
 var makeUserBookButton = document.querySelector('.create-new-book-button');
-
-// Page Sections
 var homeSection = document.querySelector('.home-view');
 var savedSection = document.querySelector('.saved-view');
 var customSection = document.querySelector('.form-view');
 var savedCoversSection = document.querySelector('.saved-covers-section');
-
-// Input Fields
 var userCover = document.querySelector('.user-cover');
 var userTitle = document.querySelector('.user-title');
 var userTagline1 = document.querySelector('.user-desc1');
 var userTagline2 = document.querySelector('.user-desc2');
-
-// We've provided a few variables below
 var savedCovers = [];
 var currentCover;
 
 // Add your event listeners here 👇
 
-showNewCoverButton.addEventListener('click', displayRandomCover);
+showNewCoverButton.addEventListener('click', createRandomCover);
 makeCustomCoverButton.addEventListener('click', showCustomPage);
 viewSavedButton.addEventListener('click', showSavedPage);
 homeButton.addEventListener('click', showHomePage);
@@ -42,23 +33,22 @@ savedCoversSection.addEventListener('dblclick', removeCoverFromSaved);
 
 // Create your event handlers and other functions here 👇
 
-displayRandomCover();
+createRandomCover();
 
 function createRandomCover() {
   var randomTitle = titles[getRandomIndex(titles)];
   var randomTag1 = descriptors[getRandomIndex(descriptors)];
   var randomTag2 = descriptors[getRandomIndex(descriptors)];
   var randomImage = covers[getRandomIndex(covers)];
-  var newCover = new Cover(randomImage, randomTitle, randomTag1, randomTag2);
-  return newCover;
+  currentCover = new Cover(randomImage, randomTitle, randomTag1, randomTag2);
+  displayCurrentCover(currentCover);
 }
 
-function displayRandomCover() {
-  currentCover = createRandomCover();
-  image.setAttribute('src', currentCover.cover);
-  coverTitle.innerText = currentCover.title;
-  tagline1.innerText = currentCover.tagline1;
-  tagline2.innerText = currentCover.tagline2;
+function displayCurrentCover(book) {
+  image.setAttribute('src', book.cover);
+  coverTitle.innerText = book.title;
+  tagline1.innerText = book.tagline1;
+  tagline2.innerText = book.tagline2;
 }
 
 function showCustomPage() {
@@ -92,13 +82,14 @@ function showHomePage() {
 
 function makeUserBook() {
   currentCover = new Cover(userCover.value, userTitle.value, userTagline1.value, userTagline2.value);
-  image.setAttribute('src', currentCover.cover);
-  coverTitle.innerText = currentCover.title;
-  tagline1.innerText = currentCover.tagline1;
-  tagline2.innerText = currentCover.tagline2;
+  displayCurrentCover(currentCover);
   covers.push(currentCover.cover);
   titles.push(currentCover.title);
-  descriptors.push(currentCover.tagline1, currentCover.tagline2);
+  if (currentCover.tagline1 !== currentCover.tagline2) {
+    descriptors.push(currentCover.tagline1, currentCover.tagline2);
+  } else {
+    descriptors.push(currentCover.tagline1);
+  }
   showHomePage();
 }
 
@@ -139,11 +130,9 @@ function removeCoverFromSaved(event) {
   }
 }
 
-// We've provided one function to get you started
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
 
 // function createNewCover() {
 //   var randomTitle = titles[getRandomIndex(titles)];
@@ -156,7 +145,6 @@ function getRandomIndex(array) {
 //   tagline2.innerText = randomTag2;
 // }
 
-
 // function makeUserBook() {
 //   image.setAttribute('src', userCover.value);
 //   coverTitle.innerText = userTitle.value;
@@ -166,7 +154,6 @@ function getRandomIndex(array) {
 //   console.log(userBook);
 //   showHomePage();
 // }
-
 
 // function removeCoverFromSaved(event) {
  
