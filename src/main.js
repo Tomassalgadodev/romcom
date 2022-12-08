@@ -21,7 +21,6 @@ var customSection = document.querySelector('.form-view');
 var savedCoversSection = document.querySelector('.saved-covers-section');
 
 // Input Fields
-
 var userCover = document.querySelector('.user-cover');
 var userTitle = document.querySelector('.user-title');
 var userTagline1 = document.querySelector('.user-desc1');
@@ -35,17 +34,11 @@ var currentCover;
 // Add your event listeners here 👇
 
 showNewCoverButton.addEventListener('click', displayRandomCover);
-
 makeCustomCoverButton.addEventListener('click', showCustomPage);
-
 viewSavedButton.addEventListener('click', showSavedPage);
-
 homeButton.addEventListener('click', showHomePage);
-
 makeUserBookButton.addEventListener('click', makeUserBook);
-
 saveButton.addEventListener('click', saveCover);
-
 savedCoversSection.addEventListener('dblclick', removeCoverFromSaved);
 
 // Create your event handlers and other functions here 👇
@@ -128,7 +121,7 @@ function displaySavedCovers() {
 
 function saveCover() {
   for (var i = 0; i < savedCovers.length; i++) {
-    if (currentCover.id === savedCovers[i].id) {
+    if (currentCover.cover === savedCovers[i].cover && currentCover.title === savedCovers[i].title && currentCover.tagline1 === savedCovers[i].tagline1 && currentCover.tagline2 === savedCovers[i].tagline2) {
       return;
     }
   }
