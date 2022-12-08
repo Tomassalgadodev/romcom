@@ -18,6 +18,7 @@ var userCover = document.querySelector('.user-cover');
 var userTitle = document.querySelector('.user-title');
 var userTagline1 = document.querySelector('.user-desc1');
 var userTagline2 = document.querySelector('.user-desc2');
+var form = document.querySelector('form');
 var savedCovers = [];
 var currentCover;
 
@@ -32,7 +33,6 @@ saveButton.addEventListener('click', saveCover);
 savedCoversSection.addEventListener('dblclick', removeCoverFromSaved);
 
 // Create your event handlers and other functions here 👇
-
 createRandomCover();
 
 function createRandomCover() {
@@ -58,6 +58,7 @@ function showCustomPage() {
   homeSection.classList.add('hidden');
   savedSection.classList.add('hidden')
   customSection.classList.remove('hidden');
+  form.reset();
   makeUserBookButton.setAttribute('type', 'button');
 }
 
