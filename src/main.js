@@ -26,7 +26,6 @@ var userTitle = document.querySelector('.user-title');
 var userTagline1 = document.querySelector('.user-desc1');
 var userTagline2 = document.querySelector('.user-desc2');
 
-
 // We've provided a few variables below
 var savedCovers = [];
 var currentCover;
@@ -130,24 +129,12 @@ function saveCover() {
 
 function removeCoverFromSaved(event) {
  
-  var elementToRemove;
-
-  if (event.target.classList.contains('saved-covers-section')) {
-    return;
-  }
-  
-  if (event.target.classList.contains('tagline-1') || event.target.classList.contains('tagline-2')) {
-    elementToRemove = event.target.parentElement.parentElement;
-  } else {
-    elementToRemove = event.target.parentElement;
-  }
-
+  var elementToRemove = event.target.closest('.mini-cover');
   elementToRemove.remove();
   
   for (var i = 0; i < savedCovers.length; i++) {
     if (elementToRemove.id === savedCovers[i].id.toString()) {
       savedCovers.splice(i, 1);
-      console.log(`It's working!`);
     }
   }
 }
@@ -178,4 +165,28 @@ function getRandomIndex(array) {
 //   userBook = new Cover(userCover.value, userTitle.value, userTagline1.value, userTagline2.value);
 //   console.log(userBook);
 //   showHomePage();
+// }
+
+
+// function removeCoverFromSaved(event) {
+ 
+//   var elementToRemove;
+
+//   if (event.target.classList.contains('saved-covers-section')) {
+//     return;
+//   }
+  
+//   if (event.target.classList.contains('tagline-1') || event.target.classList.contains('tagline-2')) {
+//     elementToRemove = event.target.parentElement.parentElement;
+//   } else {
+//     elementToRemove = event.target.parentElement;
+//   }
+
+//   elementToRemove.remove();
+  
+//   for (var i = 0; i < savedCovers.length; i++) {
+//     if (elementToRemove.id === savedCovers[i].id.toString()) {
+//       savedCovers.splice(i, 1);
+//     }
+//   }
 // }
